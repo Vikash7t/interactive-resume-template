@@ -1,0 +1,21 @@
+{
+  "name": "resucraft-ai-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ResuCraft AI — The Open, ATS-Conscious AI Resume Engine",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev:web",
+    "dev:web": "npm run dev --workspace=@resucraft/web",
+    "dev:api": "npm run start:dev --workspace=@resucraft/api",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

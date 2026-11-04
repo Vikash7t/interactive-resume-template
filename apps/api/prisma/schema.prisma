@@ -1,0 +1,27 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model SystemHealth {
+  id        String   @id @default(uuid())
+  checkName String
+  status    String
+  timestamp DateTime @default(now())
+
+  @@map("system_health")
+}
+
+model ResumeDraft {
+  id        String   @id @default(uuid())
+  title     String   @default("Untitled Resume")
+  data      Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("resume_drafts")
+}

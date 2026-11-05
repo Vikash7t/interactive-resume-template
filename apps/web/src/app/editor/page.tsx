@@ -34,6 +34,7 @@ import { CertificatesEditor } from '../../components/editor/CertificatesEditor';
 import { LanguagesEditor } from '../../components/editor/LanguagesEditor';
 import { getTemplateById } from '../../components/templates/TemplateRegistry';
 import { Button } from '../../components/ui/Button';
+import { downloadPdfResume } from '../../lib/pdf/generate-pdf';
 
 export default function EditorPage() {
   const {
@@ -52,6 +53,7 @@ export default function EditorPage() {
   const [importInput, setImportInput] = useState('');
   const [importErrors, setImportErrors] = useState<string[]>([]);
   const [mounted, setMounted] = useState(false);
+  const [isExportingPdf, setIsExportingPdf] = useState(false);
   const [mobileTab, setMobileTab] = useState<'editor' | 'preview'>('editor');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -101,6 +103,18 @@ export default function EditorPage() {
     }.json`;
     link.click();
     URL.revokeObjectURL(url);
+  };
+
+  const handleDownloadPdf = async () => {
+    try {
+      setIsExportingPdf(true);
+      await downloadPdfResume(resume);
+    } catch (err) {
+      console.error('Failed to generate ATS PDF:', err);
+      alert('Unable to generate PDF resume. Please ensure required fields are valid.');
+    } finally {
+      setIsExportingPdf(false);
+    }
   };
 
   const handleProcessImport = () => {
@@ -269,12 +283,21 @@ export default function EditorPage() {
             type="button"
             variant="primary"
             size="sm"
-            disabled
-            title="PDF Vector Generator will be wired in Phase 4"
-            className="opacity-80 cursor-not-allowed"
+            onClick={handleDownloadPdf}
+            disabled={isExportingPdf}
+            title="Download ATS-Friendly Vector PDF"
           >
-            <Download className="w-3.5 h-3.5" />
-            <span>PDF (Phase 4)</span>
+            {isExportingPdf ? (
+              <>
+                <Clock className="w-3.5 h-3.5 animate-spin" />
+                <span>Generating...</span>
+              </>
+            ) : (
+              <>
+                <Download className="w-3.5 h-3.5" />
+                <span>Download PDF</span>
+              </>
+            )}
           </Button>
         </div>
       </div>

@@ -1,2 +1,2 @@
-export * from './schemas/resume.schema.js';
-export * from './types/api.types.js';
+export * from './schemas/resume.schema';
+export * from './types/api.types';

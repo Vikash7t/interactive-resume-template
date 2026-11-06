@@ -76,7 +76,7 @@ Execute unit and integration test suites across all packages:
 ```bash
 npm test
 ```
-*Current coverage: 59 passing tests across shared schemas, alignment engine, PDF extraction, AI gateway, Better Auth, and Cloud Sync.*
+*Current coverage: 64 passing tests across shared schemas, alignment engine, PDF extraction, AI gateway, Better Auth, Cloud Sync, and full user journey suites.*
 
 ### Production Build
 ```bash
@@ -96,8 +96,9 @@ npm run build
 | **Phase 4** | PDF Generation & Tests | ✅ Merged | Direct `@react-pdf` vector renderer, `pdf-parse` extraction suite ([PR #3](https://github.com/Vikash7t/interactive-resume-template/pull/3)) |
 | **Phase 5** | Deterministic Alignment | ✅ Merged | Offline JD parser, n-gram tokenizer, skill matcher, coverage UI ([PR #4](https://github.com/Vikash7t/interactive-resume-template/pull/4)) |
 | **Phase 6** | AI Resume Assistant | ✅ Merged | Controlled bullet enhancement, anti-hallucination guardrails, BYOK gateway ([PR #5](https://github.com/Vikash7t/interactive-resume-template/pull/5)) |
-| **Phase 7** | Better Auth & Cloud Sync | ✅ Complete | Better Auth, Prisma user-owned resumes, optimistic conflict resolution ([PR #6](https://github.com/Vikash7t/interactive-resume-template/pull/6)) |
-| **Phase 8** | Testing & Production Hardening | ⏳ Planned | Full user journeys, Playwright E2E, MSW, and security audits |
+| **Phase 7** | Better Auth & Cloud Sync | ✅ Merged | Better Auth, Prisma user-owned resumes, optimistic conflict resolution ([PR #6](https://github.com/Vikash7t/interactive-resume-template/pull/6)) |
+| **Phase 8** | Testing & Production Hardening | ✅ Complete | 5 User journeys, Playwright E2E configuration, zero secret exposure ([PR #7](https://github.com/Vikash7t/interactive-resume-template/pull/7)) |
+| **Phase 9** | Marketing Launch Experience | ⏳ Planned | Polished landing page, hero section, template showcase, privacy FAQ |
 
 ---
 

@@ -176,6 +176,7 @@ export function ProjectsEditor() {
                 <BulletListManager
                   label="Architectural Highlights & Key Achievements"
                   bullets={p.highlights || []}
+                  roleTitle={p.name}
                   onChange={(updated) =>
                     p.id && updateProject(p.id, { highlights: updated })
                   }

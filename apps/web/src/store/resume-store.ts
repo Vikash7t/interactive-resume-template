@@ -90,6 +90,7 @@ export interface ResumeStoreState {
   refreshSavedResumesList: () => Promise<void>;
 
   // Import / Export Operations
+  setResumeData: (data: ResumeData) => void;
   importFromJson: (jsonStr: string) => { success: boolean; errors?: string[] };
   exportToJson: () => string;
 }
@@ -469,7 +470,15 @@ export const useResumeStore = create<ResumeStoreState>()(
         set({ savedResumesList: list });
       },
 
-      // --- IMPORT / EXPORT ---
+      // --- IMPORT / EXPORT & SYNC ---
+
+      setResumeData: (data: ResumeData) => {
+        const normalized = normalizeResumeData(data);
+        set({ resume: normalized });
+        if (get().preferences.autoSave) {
+          get().saveCurrentToDatabase();
+        }
+      },
 
       importFromJson: (jsonStr: string) => {
         const result = importFromJsonResumeString(jsonStr);

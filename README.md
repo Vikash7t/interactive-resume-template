@@ -76,7 +76,7 @@ Execute unit and integration test suites across all packages:
 ```bash
 npm test
 ```
-*Current coverage: 64 passing tests across shared schemas, alignment engine, PDF extraction, AI gateway, Better Auth, Cloud Sync, and full user journey suites.*
+*Current coverage: 68 passing tests across shared schemas, alignment engine, PDF extraction, AI gateway, Better Auth, Cloud Sync, and marketing components.*
 
 ### Production Build
 ```bash
@@ -97,8 +97,8 @@ npm run build
 | **Phase 5** | Deterministic Alignment | ✅ Merged | Offline JD parser, n-gram tokenizer, skill matcher, coverage UI ([PR #4](https://github.com/Vikash7t/interactive-resume-template/pull/4)) |
 | **Phase 6** | AI Resume Assistant | ✅ Merged | Controlled bullet enhancement, anti-hallucination guardrails, BYOK gateway ([PR #5](https://github.com/Vikash7t/interactive-resume-template/pull/5)) |
 | **Phase 7** | Better Auth & Cloud Sync | ✅ Merged | Better Auth, Prisma user-owned resumes, optimistic conflict resolution ([PR #6](https://github.com/Vikash7t/interactive-resume-template/pull/6)) |
-| **Phase 8** | Testing & Production Hardening | ✅ Complete | 5 User journeys, Playwright E2E configuration, zero secret exposure ([PR #7](https://github.com/Vikash7t/interactive-resume-template/pull/7)) |
-| **Phase 9** | Marketing Launch Experience | ⏳ Planned | Polished landing page, hero section, template showcase, privacy FAQ |
+| **Phase 8** | Testing & Production Hardening | ✅ Merged | 5 User journeys, Playwright E2E configuration, zero secret exposure ([PR #7](https://github.com/Vikash7t/interactive-resume-template/pull/7)) |
+| **Phase 9** | Marketing Launch Experience | ✅ Complete | Polished landing page, interactive showcase, privacy architecture, FAQ ([PR #8](https://github.com/Vikash7t/interactive-resume-template/pull/8)) |
 
 ---
 

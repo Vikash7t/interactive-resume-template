@@ -1,5 +1,6 @@
 export * from './schemas/resume.schema';
 export * from './schemas/ai.schema';
+export * from './schemas/sync.schema';
 export * from './types/api.types';
 export * from './alignment/types';
 export * from './alignment/skill-dictionary';

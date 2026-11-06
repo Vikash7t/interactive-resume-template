@@ -37,6 +37,7 @@ import { getTemplateById } from '../../components/templates/TemplateRegistry';
 import { Button } from '../../components/ui/Button';
 import { downloadPdfResume } from '../../lib/pdf/generate-pdf';
 import { JobAlignmentModal } from '../../components/alignment/JobAlignmentModal';
+import { CloudSyncIndicator } from '../../components/sync/CloudSyncIndicator';
 
 export default function EditorPage() {
   const {
@@ -216,6 +217,9 @@ export default function EditorPage() {
               </>
             )}
           </div>
+
+          {/* Cloud Sync Status & Account Trigger */}
+          <CloudSyncIndicator />
         </div>
 
         {/* Mobile View Toggle Switcher (Edit vs Preview) */}

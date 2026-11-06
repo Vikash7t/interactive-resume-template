@@ -111,6 +111,8 @@ export function WorkEditor() {
                 <BulletListManager
                   label="Achievement Bullet Points (STAR Method)"
                   bullets={w.highlights || []}
+                  roleTitle={w.position}
+                  company={w.name}
                   onChange={(updated) =>
                     w.id && updateWorkExperience(w.id, { highlights: updated })
                   }

@@ -12,6 +12,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@ai-sdk/google": "^4.0.112",
     "@nestjs/common": "^11.0.10",
     "@nestjs/core": "^11.0.10",
     "@nestjs/platform-express": "^11.0.10",
@@ -19,6 +20,7 @@
     "@nestjs/terminus": "^11.0.0",
     "@prisma/client": "^6.4.1",
     "@resucraft/shared": "*",
+    "ai": "^7.0.163",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.7",

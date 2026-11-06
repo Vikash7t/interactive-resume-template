@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Plus, Trash2, ChevronUp, ChevronDown } from 'lucide-react';
+import { Plus, Trash2, ChevronUp, ChevronDown, Sparkles } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { BulletEnhanceModal } from './BulletEnhanceModal';
 
 interface BulletListManagerProps {
   label?: string;
   bullets: string[];
   onChange: (updated: string[]) => void;
   placeholder?: string;
+  roleTitle?: string;
+  company?: string;
 }
 
 export function BulletListManager({
@@ -14,8 +17,11 @@ export function BulletListManager({
   bullets,
   onChange,
   placeholder = 'e.g., Architected Next.js microservice reducing API latency by 35%...',
+  roleTitle,
+  company,
 }: BulletListManagerProps) {
   const [newBullet, setNewBullet] = useState('');
+  const [enhancingIdx, setEnhancingIdx] = useState<number | null>(null);
 
   const handleAdd = () => {
     if (!newBullet.trim()) return;
@@ -90,8 +96,18 @@ export function BulletListManager({
 
             <button
               type="button"
+              onClick={() => setEnhancingIdx(idx)}
+              className="p-1.5 text-slate-400 hover:text-violet-600 rounded transition-colors cursor-pointer mt-0.5 hover:bg-violet-50"
+              title="Enhance with AI"
+              aria-label={`Enhance bullet ${idx + 1} with AI`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+            </button>
+
+            <button
+              type="button"
               onClick={() => handleRemove(idx)}
-              className="p-1.5 text-slate-400 hover:text-rose-600 rounded transition-colors cursor-pointer mt-0.5"
+              className="p-1.5 text-slate-400 hover:text-rose-600 rounded transition-colors cursor-pointer mt-0.5 hover:bg-rose-50"
               title="Delete bullet"
             >
               <Trash2 className="w-3.5 h-3.5" />
@@ -99,6 +115,21 @@ export function BulletListManager({
           </div>
         ))}
       </div>
+
+      {/* AI Bullet Enhancement Modal */}
+      {enhancingIdx !== null && bullets[enhancingIdx] !== undefined && (
+        <BulletEnhanceModal
+          isOpen={true}
+          onClose={() => setEnhancingIdx(null)}
+          originalBullet={bullets[enhancingIdx]}
+          roleTitle={roleTitle}
+          company={company}
+          onApply={(enhanced) => {
+            handleUpdate(enhancingIdx, enhanced);
+            setEnhancingIdx(null);
+          }}
+        />
+      )}
 
       {/* Add New Bullet Input */}
       <div className="flex items-center gap-2 pt-1">

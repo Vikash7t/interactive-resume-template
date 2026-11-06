@@ -5,7 +5,7 @@
 ## 1. Prerequisites
 - **Node.js:** `v22.x` (LTS recommended)
 - **npm:** `v10.x` or later
-- **PostgreSQL:** Version 16+ (Local PostgreSQL 18 is running on port `5432`)
+- **PostgreSQL:** Version 16+ (Local PostgreSQL 18 running on port `5432`)
 - **Git:** Version 2.40+
 
 ---
@@ -14,51 +14,75 @@
 
 ### Step 1: Install Dependencies
 From the repository root:
-```powershell
+```bash
 npm install
 ```
 This installs dependencies across all workspaces (`packages/shared`, `apps/web`, `apps/api`) via npm workspaces.
 
-### Step 2: Environment Configuration
-Copy the template environment file:
-```powershell
-Copy-Item .env.example .env
-```
-Inside `.env`, set your local PostgreSQL password:
-```env
-DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/resucraft_dev?schema=public"
+### Step 2: Generate Prisma Client
+```bash
+npx prisma generate --schema=apps/api/prisma/schema.prisma
 ```
 
-### Step 3: Run Build Verification
-```powershell
+### Step 3: Configure Environment Variables
+Copy `.env.example` to `.env`:
+```bash
+cp .env.example .env
+```
+Inside `.env`, configure:
+```env
+DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/resucraft_dev?schema=public"
+PORT=4000
+API_PREFIX="api"
+CORS_ORIGIN="http://localhost:3000"
+NEXT_PUBLIC_API_URL="http://localhost:4000/api"
+
+# Optional: Google Gemini API Key for server-side AI assistant (or use BYOK in UI)
+GOOGLE_GENERATIVE_AI_API_KEY=""
+```
+
+### Step 4: Build Verification
+```bash
 npm run build
 ```
 
-### Step 4: Start Applications
-* **Start Frontend (Next.js):**
-  ```powershell
-  npm run dev:web
+### Step 5: Start Applications
+- **Start Web Application (Next.js 15):**
+  ```bash
+  npm run dev --workspace=@resucraft/web
   ```
   Access at [http://localhost:3000](http://localhost:3000).
 
-* **Start Backend (NestJS):**
-  ```powershell
-  npm run dev:api
+- **Start API Gateway (NestJS 11):**
+  ```bash
+  npm run start:dev --workspace=@resucraft/api
   ```
-  Access API health at [http://localhost:4000/api/health](http://localhost:4000/api/health).  
-  Access Swagger API docs at [http://localhost:4000/api/docs](http://localhost:4000/api/docs).
+  Access API health at [http://localhost:4000/api/health](http://localhost:4000/api/health).
 
 ---
 
-## 3. Database Management with Prisma
+## 3. Testing Commands
 
-Generate Prisma Client:
-```powershell
-npm run prisma:generate --workspace=@resucraft/api
+### Run All Monorepo Tests (68 tests across 15 suites)
+```bash
+npm test
 ```
 
-Run Migrations:
-```powershell
-npm run prisma:migrate --workspace=@resucraft/api
+### Run Playwright End-to-End User Journeys
+```bash
+npm run test:e2e --workspace=@resucraft/web
 ```
-Prisma will prompt to automatically create the `resucraft_dev` database on your local PostgreSQL server if it does not already exist.
+
+---
+
+## 4. Database Commands (Prisma ORM)
+
+### Run Migrations
+```bash
+npx prisma migrate dev --schema=apps/api/prisma/schema.prisma
+```
+
+### Launch Visual Database GUI
+```bash
+npx prisma studio --schema=apps/api/prisma/schema.prisma
+```

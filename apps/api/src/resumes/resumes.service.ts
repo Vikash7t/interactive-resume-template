@@ -24,7 +24,7 @@ export class ResumesService {
       orderBy: { updatedAt: 'desc' },
     });
 
-    return resumes.map((r) => this.mapToCloudResume(r));
+    return resumes.map((r: any) => this.mapToCloudResume(r));
   }
 
   /**

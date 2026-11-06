@@ -42,6 +42,9 @@ Thumbs.db
 !.vscode/extensions.json
 !.vscode/settings.json
 
+# TypeScript build cache
+*.tsbuildinfo
+
 # Prisma
 apps/api/prisma/*.db
 apps/api/prisma/*.db-journal

@@ -22,6 +22,7 @@ import {
   Eye,
   Edit3,
   Columns,
+  Target,
 } from 'lucide-react';
 import { useResumeStore } from '../../store/resume-store';
 import type { ResumeSectionId } from '@resucraft/shared';
@@ -35,6 +36,7 @@ import { LanguagesEditor } from '../../components/editor/LanguagesEditor';
 import { getTemplateById } from '../../components/templates/TemplateRegistry';
 import { Button } from '../../components/ui/Button';
 import { downloadPdfResume } from '../../lib/pdf/generate-pdf';
+import { JobAlignmentModal } from '../../components/alignment/JobAlignmentModal';
 
 export default function EditorPage() {
   const {
@@ -50,6 +52,7 @@ export default function EditorPage() {
   } = useResumeStore();
 
   const [importModalOpen, setImportModalOpen] = useState(false);
+  const [alignmentModalOpen, setAlignmentModalOpen] = useState(false);
   const [importInput, setImportInput] = useState('');
   const [importErrors, setImportErrors] = useState<string[]>([]);
   const [mounted, setMounted] = useState(false);
@@ -281,6 +284,17 @@ export default function EditorPage() {
 
           <Button
             type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => setAlignmentModalOpen(true)}
+            title="Analyze match against target Job Description"
+          >
+            <Target className="w-3.5 h-3.5 text-blue-600" />
+            <span className="hidden sm:inline">Job Alignment</span>
+          </Button>
+
+          <Button
+            type="button"
             variant="primary"
             size="sm"
             onClick={handleDownloadPdf}
@@ -445,6 +459,13 @@ export default function EditorPage() {
           </div>
         </div>
       )}
+
+      {/* Target Job Description Alignment Engine Modal */}
+      <JobAlignmentModal
+        isOpen={alignmentModalOpen}
+        onClose={() => setAlignmentModalOpen(false)}
+        resume={resume}
+      />
     </div>
   );
 }
